@@ -9,7 +9,8 @@ use app\models\News;
  * Description of Main
  *
  */
-class CategoryController extends AppController{
+class CategoryController extends AppController
+{
 
 	public function indexAction ()
 	{
