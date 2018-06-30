@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Category;
 use app\models\News;
+use app\models\Tag;
 
 /**
  * Description of Main
@@ -32,7 +33,17 @@ class MainController extends AppController{
         $categories = $category->findAll();
 
         for ($i=1; $i < 6; $i++) { 
-            $news[$i] = $articles->findBySql("SELECT news.id AS article_id, news.name AS title, news.date_create, news.image, news.hits, user.id AS user_id, user.name, category.id AS category_id, category.name AS category FROM `news` LEFT JOIN user ON news.user_id = user.id LEFT JOIN category ON news.category_id = category.id WHERE category_id = $i ORDER BY date_create DESC LIMIT 5");
+            $news[$i] = $articles->findBySql("SELECT news.tag, news.id AS article_id, news.name AS title, news.date_create, news.image, news.hits, user.id AS user_id, user.name, category.id AS category_id, category.name AS category FROM `news` LEFT JOIN user ON news.user_id = user.id LEFT JOIN category ON news.category_id = category.id WHERE category_id = $i ORDER BY date_create DESC LIMIT 5");
+        }
+
+        for ($i=0; $i < count($news); $i++) { 
+            for ($j=0; $j < count($news[$i]); $j++) { 
+                if ($news[$i][$j]['tag'] != '') {
+                    if (strpos($news[$i][$j]['tag'], ',')) {
+                        $news[$i][$j]['tag'] = explode(',', $news[$i][$j]['tag']);
+                    }
+                }
+            }
         }
 
         $title = 'Главная страница';
@@ -41,13 +52,24 @@ class MainController extends AppController{
 
     }
 
-    public function testAction ()
-    {
+    public function tagAction ()
+    {   
+        $tags = new Tag;
+        $news = new News;
 
-    	$test = "12312312321313";
+        if (empty($_GET['tag'])) {
+            $result = $tags->findAll();
+            $check = false;
 
+        }
+        else
+        {
+            $result = $news->findLike($_GET['tag'], 'tag');
+            $check = true;
+        }
 
-    	$this->set(compact('test'));
+        $title = "тег - " . $_GET['tag'];
+    	$this->set(compact('result', 'check', 'title'));
 
     }
     
