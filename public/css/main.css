@@ -1,3 +1,13 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
 body{
     background: #ccc;
+}
+
+.vi {
+	float: left;
+	margin-bottom: 5%;
 }

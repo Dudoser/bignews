@@ -32,6 +32,12 @@ abstract class Model {
         $sql = "SELECT * FROM {$this->table} WHERE $field = ? LIMIT 1";
         return $this->pdo->query($sql, [$id]);
     }
+
+    public function findWhere($id, $field = ''){
+        $field = $field ?: $this->pk;
+        $sql = "SELECT * FROM {$this->table} WHERE $field = ? ";
+        return $this->pdo->query($sql, [$id]);
+    }
     
     public function findBySql($sql, $params = []){
         return $this->pdo->query($sql, $params);

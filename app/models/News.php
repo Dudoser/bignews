@@ -6,9 +6,9 @@ namespace app\models;
  * Description of Main
  *
  */
-class Main extends \vendor\core\base\Model{
+class News extends \vendor\core\base\Model{
     
-    public $table = 'posts';
+    public $table = 'news';
     public $pk = 'id';
     
 }
