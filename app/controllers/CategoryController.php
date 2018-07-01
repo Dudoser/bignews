@@ -26,11 +26,20 @@ class CategoryController extends AppController
 		$category = new Category;
 		$news = new News;
 
-		$categories = $category->findOne($_GET['id']);
-		$articles = $news->findWhere($_GET['id'], 'category_id');
+		$id = $_GET['id'];
+		$page = ($_GET['page'] - 1) * 5;
 
-		$this->set(compact('categories', 'articles'));
+		$categories = $category->findOne($_GET['id']);
+		 
+		//$articles = $news->findPage($id, $page);
+		$articles = $news->findBySql("SELECT * FROM news WHERE category_id = $id ORDER BY id DESC LIMIT $page, 5");
+		$art_count = $news->findBySql("SELECT COUNT(id) AS total FROM news WHERE category_id = $id");
+		$count_page = ceil($art_count[0]['total'] / 5);
+			
+		$this->set(compact('categories', 'articles', 'count_page'));
 	}
+  
 
 }
+
 ?>
