@@ -13,6 +13,25 @@
         <![endif]-->
     </head>
     <body>
+         <header id="head">
+            <a href="/"><div id=main-but>Главная</div></a>
+            <div id="inp-search">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                      <input type="text" id="search" class="form-control" placeholder="введите тег..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <form id="search-form" action="/main/viws?tag=" method="POST">
+                            <button class="btn btn-outline-secondary" id="but-s"  type="submit">Button</button>
+                            <button class="btn btn-outline-secondary" id="but-r" onclick="fuu()" type="button">reset</button>
+                        </form>
+                      </div>
+                    </div>
+                    <select multiple class="form-control" id="list-search-form">
+                    </select>
+                </div>
+            </div>
+        </header>
+        
         <marquee>
             <h1>Ах ты ж ёб твою мать!</h1>
         </marquee>
@@ -24,5 +43,6 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <script src="../../../public/js/search.js"></script>
     </body>
 </html>

@@ -28,26 +28,43 @@ class MainController extends AppController{
         $title = 'PAGE TITLE';
         $this->set(compact('title', 'posts'));*/
 
-        $category = new Category;
-        $articles = new News;
-        $categories = $category->findAll();
 
-        for ($i=1; $i < 6; $i++) { 
-            $news[$i] = $articles->findBySql("SELECT news.tag, news.id AS article_id, news.name AS title, news.date_create, news.image, news.hits, user.id AS user_id, user.name, category.id AS category_id, category.name AS category FROM `news` LEFT JOIN user ON news.user_id = user.id LEFT JOIN category ON news.category_id = category.id WHERE category_id = $i ORDER BY date_create DESC LIMIT 5");
+        if ($_POST['is_ajax']) {
+
+            $tags = new Tag;
+
+            $listTag = $tags->findLike($_POST['input'], 'tag_name');
+
+            $parseTag = json_encode($listTag);
+            header("Content-type: application/json");
+            print($parseTag);
+            exit();
+        
         }
+        else
+        {
 
-        for ($i=0; $i < count($news); $i++) { 
-            for ($j=0; $j < count($news[$i]); $j++) { 
-                if ($news[$i][$j]['tag'] != '') {
-                    if (strpos($news[$i][$j]['tag'], ',')) {
-                        $news[$i][$j]['tag'] = explode(',', $news[$i][$j]['tag']);
+            $category = new Category;
+            $articles = new News;
+            $categories = $category->findAll();
+
+            for ($i=1; $i < 6; $i++) { 
+                $news[$i] = $articles->findBySql("SELECT news.tag, news.id AS article_id, news.name AS title, news.date_create, news.image, news.hits, user.id AS user_id, user.name, category.id AS category_id, category.name AS category FROM `news` LEFT JOIN user ON news.user_id = user.id LEFT JOIN category ON news.category_id = category.id WHERE category_id = $i ORDER BY date_create DESC LIMIT 5");
+            }
+
+            for ($i=0; $i < count($news); $i++) { 
+                for ($j=0; $j < count($news[$i]); $j++) { 
+                    if ($news[$i][$j]['tag'] != '') {
+                        if (strpos($news[$i][$j]['tag'], ',')) {
+                            $news[$i][$j]['tag'] = explode(',', $news[$i][$j]['tag']);
+                        }
                     }
                 }
             }
-        }
 
-        $title = 'Главная страница';
-        $this->set(compact('news', 'title'));
+            $title = 'Главная страница';
+            $this->set(compact('news', 'title'));
+        }
 
 
     }

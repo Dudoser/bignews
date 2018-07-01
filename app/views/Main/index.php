@@ -1,5 +1,8 @@
-
-
+<span id="result"></span>
+<br>
+<br>
+<br>
+<br>
 <?php for ($i=0; $i < count($news)+1; $i++) :?>
         <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 vi">
             <div class="panel-body">

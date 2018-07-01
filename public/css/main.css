@@ -11,3 +11,36 @@ body{
 	float: left;
 	margin-bottom: 5%;
 }
+
+#but-s {
+	background-color: green;
+}
+
+#but-r {
+	background-color: red;
+}
+
+#main-but {
+	float: left;
+	background-color: #7aedf9;
+	padding: 2% 0% 1.5% 5%;
+	width: 15%;
+}
+
+#head {
+	height: 70px;
+	background-color: #7b7b7b;
+}
+
+#inp-search {
+	float: right;
+	width: 25%;
+}
+
+#list-search-form {
+	display: none;
+	width:78%;
+	height: 115px;
+	margin-top: -5% !important;
+	overflow:  hidden;
+}
