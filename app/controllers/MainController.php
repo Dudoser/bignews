@@ -29,6 +29,7 @@ class MainController extends AppController{
         $this->set(compact('title', 'posts'));*/
 
 
+<<<<<<< HEAD
         if ($_POST['is_ajax']) {
 
             $tags = new Tag;
@@ -40,6 +41,10 @@ class MainController extends AppController{
             print($parseTag);
             exit();
         
+=======
+        for ($i=1; $i < 7; $i++) { 
+            $news[$i] = $articles->findBySql("SELECT news.tag, news.id AS article_id, news.name AS title, news.date_create, news.image, news.hits, user.id AS user_id, user.name, category.id AS category_id, category.name AS category FROM `news` LEFT JOIN user ON news.user_id = user.id LEFT JOIN category ON news.category_id = category.id WHERE category_id = $i ORDER BY date_create DESC LIMIT 5");
+>>>>>>> 4d0dea96e2d69c774a26b17b83efae2f3dead013
         }
         else
         {
