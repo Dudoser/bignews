@@ -40,6 +40,12 @@ class Db {
     public function query($sql, $params = []) {
         self::$countSql++;
         self::$queries[] = $sql;
+        $noReturn = ['INSERT', 'UPDATE', 'DELETE'];
+        $sql_array = explode(' ', $sql);
+        if (in_array($sql_array[0], $noReturn)) {
+            $stmt = $this->pdo->exec($sql);
+            return $stmt;
+        }
         $stmt = $this->pdo->prepare($sql);
         $res = $stmt->execute($params);
         if($res !== false){

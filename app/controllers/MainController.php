@@ -28,7 +28,7 @@ class MainController extends AppController{
         $title = 'PAGE TITLE';
         $this->set(compact('title', 'posts'));*/
 
-        if ($_POST['is_ajax']) {
+        if (isset($_POST['is_ajax'])) {
 
             $tags = new Tag;
 
@@ -52,7 +52,7 @@ class MainController extends AppController{
             }
 
             for ($i=0; $i < count($news); $i++) { 
-                for ($j=0; $j < count($news[$i]); $j++) { 
+                for ($j=0; $j < count(@$news[$i]); $j++) { 
                     if ($news[$i][$j]['tag'] != '') {
                         if (strpos($news[$i][$j]['tag'], ',')) {
                             $news[$i][$j]['tag'] = explode(',', $news[$i][$j]['tag']);

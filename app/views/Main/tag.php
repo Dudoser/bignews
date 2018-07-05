@@ -11,15 +11,15 @@
 		echo "По тегу <i><b>" . $_GET['tag'] . "</b></i> есть такие статьи: ";
 		echo "<br />";
 		echo "<br />";
-		echo "<br />";
-
-		foreach ($result as$value) {
-			echo $value['name'] . "<br />";	
-			echo $value['image'] . "<br />";	
-			echo $value['hits'] . "<br />";	
-			echo "<br />";
-			echo "<br />";
-		} 		
+		echo "<br />"; 		
 	}
 
+	// die(debug($result));
 ?>
+
+<?php foreach ($result as $value): ?>
+	<a href="/news/index?id=<?= $value['id'] ?>&page=1"><?= $value['name'] ?></a>
+	<p>Посещений: <?= $value['hits'] ?></p>
+	<br />
+	<br />
+<?php endforeach ?>

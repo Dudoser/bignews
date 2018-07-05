@@ -10,7 +10,6 @@ input.oninput = function() {
 	if (input.value.length == 0) {
 		setTimeout(func, 100);
 	}
-	document.getElementById('result').innerHTML = input.value;
 	if (input.value.length > 2) {
 		$.ajax( {
 			url: "/main/index/",

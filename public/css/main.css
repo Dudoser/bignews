@@ -44,3 +44,64 @@ body{
 	margin-top: -5% !important;
 	overflow:  hidden;
 }
+
+					/*  START STYLE FOR COMMENTS   */
+
+.comments {
+	margin: 0% 0% 2% 0%;
+	border-bottom: 3px solid white;
+	float: left;
+
+}
+
+.user-image img {
+	width: 70%;
+}
+
+.user-image {
+	margin: 2% 0% 1% 0%;
+	float: left;
+}
+
+.comment-cont {
+	margin: 2% 0% 1% 0%;
+	float: left; 
+}
+
+.rate-comment {
+	margin: 5% 0% 0% 18%;
+	width: 30%;
+}
+
+.pluse, .minus {
+	padding: 0% 0% 0% 35%;
+	font-size: 130%;
+	cursor: pointer;
+}
+
+.count {
+	font-size: 130%;
+	text-align: center;
+}
+
+
+.date-commet {
+	float: left;
+	margin-top: 2%;
+}
+
+#comment-form {
+	width: 100%;
+}
+
+#comment-form input {
+	color: #000;
+	background-color: #5b3f5f;
+	border-radius: 20px;
+	padding: 1% 1% 1% 1%;
+	cursor: pointer;
+}
+
+#error {
+	color: red;
+}
