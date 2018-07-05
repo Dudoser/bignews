@@ -22,4 +22,4 @@
 	<p>Посещений: <?= $value['hits'] ?></p>
 	<br />
 	<br />
-<?php endforeach ?>
+<?php endforeach; ?>

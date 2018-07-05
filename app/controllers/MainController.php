@@ -105,7 +105,7 @@ class MainController extends AppController{
             $sel_2 = $_POST['sel_2'];
             $date_1 = $_POST['calendar_1'];
             $date_2 = $_POST['calendar_2'];
-            $page = $_GET['page'];
+            // $page = $_GET['page'];
 
             //$r = $news->findBySql("SELECT news.name, news.date_create FROM category left join news  ON category.name = '$sel_1' OR category.name = '$sel_2'");
             $r = $news->findBySql("SELECT news.name, news.date_create FROM category left join news  ON category.id = news.category_id WHERE category.name = '$sel_1' OR category.name = '$sel_2' OR category.name = 'sel_2' AND category.name = 'sel_1' AND news.date_create BETWEEN '$date_1' AND '$date_2'");

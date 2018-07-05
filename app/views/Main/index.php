@@ -5,13 +5,13 @@
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="d-block w-100" src="../../../public/images/1.jpeg" alt="First slide">
+              <img class="d-block w-100" src="../../../public/image/news/no-image.png" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="../../../public/images/2.jpg" alt="Second slide">
+              <img class="d-block w-100" src="../../../public/image/news/no-image.png" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="../../../public/images/3.jpg" alt="Third slide">
+              <img class="d-block w-100" src="../../../public/image/news/no-image.png" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -23,16 +23,9 @@
             <span class="sr-only">Next</span>
           </a>
         </div>  
+<?php endfor; ?>
 
-
-<span id="result"></span>
-<br>
-<br>
-<br>
-<br>
-
-
-<?php for ($i=0; $i < count($news)+1; $i++) :?>
+<?php for ($i=0; $i < count($news)+1; $i++): ?>
         <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 vi">
             <div class="panel-body">
                 <a href="/category/view/?id=<?=$news[$i][0]['category_id']?>&page=1"><?= $news[$i][0]['category'] ?></a>
@@ -45,7 +38,7 @@
                         <?= isset($article['name']) ? $article['name'] : ' '; ?>
                     <div class="panel-heading"><a href="/news/index/?id=<?=$article['id'];?>"><?= $article['title'] ?></a></div>
                     <div class="panel-body">
-                        <?= $post['name']; ?>
+                        <?= $article['name']; ?>
                     </div>
                     <div class="panel-body">
                         <?php if (is_array($article['tag'])): ?>
@@ -64,5 +57,5 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <img src="../../../public/images/1.jpeg">
-<?php endfor;?>
+        <img src="../../../public/image/news/no-image.png" />
+<?php endfor; ?>

@@ -145,7 +145,7 @@
         <script type="text/javascript">
             setTimeout(function mod() {
 
-                //$('.modal').modal("show");
+                // $('.modal').modal("show");
             }, 5000);
 
         </script>
