@@ -39,16 +39,6 @@
                     <form id="form-auth" method="POST" action="/auth/<?= $sign['path'] ?>" />
                       <input type="submit" name="auth" value="<?= $sign['nameButton'] ?>" />
                     </form>
-
-                  <!-- <?php if(isset($_SESSION['user_id'])): ?>
-                    <form id="form-auth" method="POST" action="/auth/exit/" />
-                      <input type="submit" name="auth" value="Выход" />
-                    </form>
-                  <?php else: ?>
-                    <form id="form-auth" method="POST" action="/auth/" />
-                      <input type="submit" name="auth" value="Авторизация" />
-                    </form>
-                                  <?php endif; ?> -->
                 </div>
             </div>
 
@@ -98,7 +88,6 @@
         <marquee>
             <h1>Курс валют и погода</h1>
         </marquee>
-        <?php debug($_SESSION);?>
         
         <?php if(isset($_SESSION['reg'])): ?>
             <div id="registration">
