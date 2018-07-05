@@ -39,6 +39,14 @@ class CategoryController extends AppController
 		$this->set(compact('categories', 'articles', 'count_page'));
 	}
   
+  //   public function defaultAction()
+  //   {
+		// $category = new Category;
+
+		// $categories = $category->findAll();
+
+		// $this->set(compact('categories'));
+  //   }
 
 }
 
