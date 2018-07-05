@@ -28,7 +28,27 @@
                     </div>
                     <select multiple class="form-control" id="list-search-form">
                     </select>
+                  
+                </div>
 
+                <div>
+                    <?php
+
+                      isset($_SESSION['user_id']) ? $sign =['path' => "exit/", 'nameButton' => 'Выход'] : $sign =['path' => '', 'nameButton' => 'Авторизация'];
+                    ?>
+                    <form id="form-auth" method="POST" action="/auth/<?= $sign['path'] ?>" />
+                      <input type="submit" name="auth" value="<?= $sign['nameButton'] ?>" />
+                    </form>
+
+                  <!-- <?php if(isset($_SESSION['user_id'])): ?>
+                    <form id="form-auth" method="POST" action="/auth/exit/" />
+                      <input type="submit" name="auth" value="Выход" />
+                    </form>
+                  <?php else: ?>
+                    <form id="form-auth" method="POST" action="/auth/" />
+                      <input type="submit" name="auth" value="Авторизация" />
+                    </form>
+                                  <?php endif; ?> -->
                 </div>
             </div>
 
@@ -78,8 +98,15 @@
         <marquee>
             <h1>Курс валют и погода</h1>
         </marquee>
+        <?php debug($_SESSION);?>
+        
+        <?php if(isset($_SESSION['reg'])): ?>
+            <div id="registration">
+              <h4><?= $_SESSION['reg'] ?> -> <a href="#">перейти в кабинет</a></h4>
+              <?php unset($_SESSION['reg']); ?>
+            </div>
+        <?php endif; ?>   
 
-      
         
         <div class="container-fluid">
             <div class="row">

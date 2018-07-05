@@ -105,3 +105,71 @@ body{
 #error {
 	color: red;
 }
+
+					/* END STYLE FOR COMMENTS */
+					/* START STYLE FOR AUTH */
+
+					/* start style for form */
+.bg {
+	margin: 4.5% 0% 0% 0%;
+}
+.bg, .reg{
+	background-color: rgba(33, 226, 208, 0.41);	
+	width: 30%;
+	position: fixed;
+	border-radius: 2%;
+}
+.bg input, .reg input {
+	float: right;
+	font-size: 120%;
+	width: 37%;
+	padding: 1% 0% 1% 0%;
+	margin: 5% 9% 2% 0%
+}
+.bg label, .reg label {
+	float: left;
+	font-size: 120%;
+	margin: 5% 0% 3% 4%;
+	line-height: 150%;
+}
+
+.bg button{
+	border-radius: 20%;
+}
+
+.bg button, .reg button {
+	float: left;
+	margin: 5% 0% 10% 6%;
+	background-color: rgba(33, 226, 208, 0.41);
+	font-size: 150%;
+	padding: 2% 4% 2% 4%;
+}
+
+.bg button:hover, .reg button:hover {
+	background-color: inherit;
+}
+
+.reg {
+	margin: 4.5% 0% 0% 34%;
+}
+.reg button {
+	border-radius: 12%;
+}
+					/* end style for form */
+
+#auth {
+	/*margin: 9% 0% 0% 10%;	*/
+}
+#auth, #reg-title {
+	position: fixed;
+	background-color: rgba(33, 226, 208, 0.41);
+	width: 30%;
+	text-align: center;
+	border-radius: 5%;
+} 
+
+#reg-title {
+	margin: 0% 0% 0% 34%;
+}
+
+					/* END STYLE FOR AUTH */
