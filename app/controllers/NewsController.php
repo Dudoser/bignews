@@ -97,12 +97,32 @@ class NewsController extends AppController
 
 			
 			$posts = $post->findOne($_GET['id']);
+
+			// die(debug($posts[0]['analitics']));
+			if ($posts[0]['analitics'] == 1) {
+				if (empty($_SESSION) && !isset($_SESSION['user_id']) && count($_SESSION) != 4) {
+					
+					
+					
+					$textNews = $posts[0]['text'];
+
+					// $textNews = str_replace('.', '#.', subject);
+
+					$textNews = explode('.', $textNews);
+					$textNews = array_slice($textNews, 0, 5);
+					$textNews = implode('.', $textNews);
+					$posts[0]['text'] = $textNews . ' ...';
+
+					$textForuser = 'Для того что бы прочитать новость целиком, вам нужно авторизоваться';
+				}
+			}
+
 			
 			$comments = $comment->findBySql("SELECT user.id AS user_id, user.name AS user_name, user.image AS user_image, comment.id AS comment_id, comment.text AS comment_text, comment.like_news, comment.date_create FROM `comment` LEFT JOIN  user ON comment.user_id = user.id WHERE comment.news_id = $id ORDER BY comment.like_news DESC");
 
 
 			$title = 'новость';
-			$this->set(compact('posts', 'comments', 'title'));
+			$this->set(compact('posts', 'comments', 'title', 'textForuser'));
 		// }
 
 	}

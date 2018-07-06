@@ -1,25 +1,11 @@
-<?php
-
-
-	if (empty($_GET['tag'])) {
-		foreach ($result as $value) {
-			echo $value['tag_name'] . "<br />";
-		}
-	}
-	else
-	{
-		echo "По тегу <i><b>" . $_GET['tag'] . "</b></i> есть такие статьи: ";
-		echo "<br />";
-		echo "<br />";
-		echo "<br />"; 		
-	}
-
-	// die(debug($result));
-?>
-
+<?= $check; ?>
+<br />
+<br />
 <?php foreach ($result as $value): ?>
-	<a href="/news/index?id=<?= $value['id'] ?>&page=1"><?= $value['name'] ?></a>
-	<p>Посещений: <?= $value['hits'] ?></p>
+	<a href="<?= $path ?><?= $value[$val] ?>&page=1"><?= $value[$name] ?></a>
+	<?php if(isset($value['hits'])) :?>
+		<p>Посещений: <?= $value['hits'] ?></p>
+	<?php endif; ?>
 	<br />
 	<br />
 <?php endforeach; ?>

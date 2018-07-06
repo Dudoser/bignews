@@ -23,6 +23,7 @@
             <span class="sr-only">Next</span>
           </a>
         </div>  
+        </div>
 <?php endfor; ?>
 
 <?php for ($i=0; $i < count($news)+1; $i++): ?>

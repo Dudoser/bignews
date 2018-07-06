@@ -2,6 +2,9 @@
 	<img src="../../../public/image/news/<?php echo $posts[0]['image']; ?>" />
 	<h1><?php echo $posts[0]['name']; ?></h1>
 	<p><?php echo $posts[0]['text']; ?></p>
+	<?php if(isset($textForuser)) : ?>
+		<h4 id="for-analitics"><?= $textForuser ?> <p>&darr;</p><a href="/auth/">Авторизовация</a></h4>
+	<?php endif; ?>
 	<p>Посещений: <?php echo $posts[0]['hits']; ?></p>
 	<p>теги: <?php echo $posts[0]['tag']; ?></p>
 	<p><?php echo $posts[0]['date_create']; ?></p>

@@ -82,17 +82,23 @@ class MainController extends AppController{
 
         if (empty($_GET['tag'])) {
             $result = $tags->findAll();
-            $check = false;
+            $check = 'Теги которые есть: ';
+            $path = '/main/tag?tag=';
+            $name = 'tag_name';
+            $val = 'tag_name';
 
         }
         else
         {
             $result = $news->findLike($_GET['tag'], 'tag');
-            $check = true;
+            $check = "по тегу <b>". $_GET['tag'] . "</b> есть такие теги: " ;
+            $path = '/news/index?id=';
+            $val = 'id';
+            $name = 'name';
         }
 
-        $title = "тег - " . $_GET['tag'];
-    	$this->set(compact('result', 'check', 'title'));
+        isset($_GET['tag']) ? $title = "тег - " . $_GET['tag'] : $title = "теги";
+    	$this->set(compact('result', 'check', 'title', 'name', 'path', 'val'));
 
     }
 

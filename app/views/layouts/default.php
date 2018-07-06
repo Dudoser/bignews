@@ -14,74 +14,99 @@
     </head>
     <body>
          <header id="head">
-            <a href="/"><div id=main-but>Главная</div></a>
-            <div id="inp-search">
-                <div class="form-group">
-                    <div class="input-group mb-3">
-                      <input type="text" id="search" class="form-control" placeholder="введите тег..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                      <div class="input-group-append">
-                        <form id="search-form" action="/main/viws?tag=" method="POST">
-                            <button class="btn btn-outline-secondary" id="but-s"  type="submit">Button</button>
-                            <button class="btn btn-outline-secondary" id="but-r" onclick="fuu()" type="button">reset</button>
+            <div class="row">
+              <div class="col-md-2 col-lg-2 col-sm-2 col-lg-2">
+                <a href="/"><div id=main-but>Главная</div></a>
+              </div>
+
+
+              <div id="header-menu" class="col-md-8 col-lg-8 col-sm-8 col-lg-8">
+                <ul type="none" class="menu">
+                  <li><a href="/">Профиль</a></li>
+                  <li><a href="/category/">Категории</a></li>
+                  <li><a href="/main/tag/">Теги</a></li>
+                  <li class="btn">Поиск</li>
+                  <li><a href="/">О Нас</a></li>
+                  <li onmouseover="move()" onmouseout="out()" ><a href="/">Подпольный бизнес</a>
+                    <ul class="subMenu" type="none">
+                      <li onmouseover="move1()" onmouseout="out1()"><a href="/">Продажа наркотиков</a>
+                        <ul class="subSubMenu" type="none">
+                          <li><a href="/">Кокаин</a></li>
+                          <li><a href="/">Героин</a></li>
+                          <li><a href="/">ЛСД</a></li>
+                          <li><a href="/">Амфетамины</a></li>
+                          <li><a href="/">Барбитураты</a></li>
+                          <li><a href="/">Грибы</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="/">торговля оружием</a></li>
+                      <li><a href="/">купить таз (дешево)</a></li>
+                      <li><a href="/">киллер (дешево)</a></li>
+                      <li><a href="/">закрыть сессию в КНУ (дешево)</a></li>
+                      <li><a href="/">работа в Польше</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-2 col-lg-2 col-sm-2 col-lg-2">
+                        <?php
+
+                          isset($_SESSION['user_id']) ? $sign =['path' => "exit/", 'nameButton' => 'Выход'] : $sign =['path' => '', 'nameButton' => 'Авторизация'];
+                        ?>
+                        <form id="form-auth" method="POST" action="/auth/<?= $sign['path'] ?>" />
+                          <input type="submit" name="auth" value="<?= $sign['nameButton'] ?>" />
                         </form>
-                      </div>
                     </div>
-                    <select multiple class="form-control" id="list-search-form">
-                    </select>
-                  
-                </div>
-
-                <div>
-                    <?php
-
-                      isset($_SESSION['user_id']) ? $sign =['path' => "exit/", 'nameButton' => 'Выход'] : $sign =['path' => '', 'nameButton' => 'Авторизация'];
-                    ?>
-                    <form id="form-auth" method="POST" action="/auth/<?= $sign['path'] ?>" />
-                      <input type="submit" name="auth" value="<?= $sign['nameButton'] ?>" />
-                    </form>
-                </div>
             </div>
 
 
-<div class="btn-group">
-  <button type="button" class="btn btn-danger">Action</button>
-  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
-  </div>
-</div>
+            <div class="row block" id="search-sub-menu">
+              <div class="col-md-1 col-lg-1 col-sm-1 col-lg-1"></div>
+              <div class="col-md-7 col-lg-7 col-sm-7 col-lg-7" id="ser">
+                  <form method="POST" action="/Main/search/">
+                      <select name="sel_1">
 
-            <div>
-                <form method="POST" action="/Main/search/">
-                    <select name="sel_1">
+                          <option value="any">Any</option>
 
-                        <option value="any">Any</option>
+                          <?php foreach ($categories as $category): ?>
+                              <option><?php echo $category['name']; ?></option>
+                          <?php endforeach; ?>
 
-                        <?php foreach ($categories as $category): ?>
-                            <option><?php echo $category['name']; ?></option>
-                        <?php endforeach; ?>
+                      </select>
 
-                    </select>
+                      <select name="sel_2">
+                          <option value="any">Any</option>
 
-                    <select name="sel_2">
-                        <option value="any">Any</option>
+                          <?php foreach ($categories as $category): ?>
+                              <option><?php echo $category['name']; ?></option>
+                          <?php endforeach; ?>  
 
-                        <?php foreach ($categories as $category): ?>
-                            <option><?php echo $category['name']; ?></option>
-                        <?php endforeach; ?>  
+                      </select>
 
-                    </select>
+                      <input type="date" name="calendar_1">
+                      <input type="date" name="calendar_2"> 
+                      <input type="submit" name="submit_filter" value="filter">
+                  </form>
+              </div>
+              <div id="inp-search" class="col-md-3 col-lg-3 col-sm-3 col-lg-3">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                          <input type="text" id="search" class="form-control" placeholder="введите тег..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                            <form id="search-form" action="/main/viws?tag=" method="POST">
+                                <button class="btn btn-outline-secondary" id="but-s"  type="submit">Button</button>
+                                <button class="btn btn-outline-secondary" id="but-r" onclick="fuu()" type="button">reset</button>
+                            </form>
+                          </div>
+                        </div>
+                        <select multiple class="form-control" id="list-search-form">
+                        </select>
+                      
+                    </div>
 
-                    <input type="date" name="calendar_1">
-                    <input type="date" name="calendar_2"> 
-                    <input type="submit" name="submit_filter" value="filter">
-                </form>
+                    
+              </div>
+              <div class="col-md-1 col-lg-1 col-sm-1 col-lg-1"></div>
             </div>
         </header>
         
@@ -102,7 +127,7 @@
                 <div class="col-2">
                     
                 </div>
-                <div class="col-8">
+                <div class="col-8" id="cont">
                     <?=$content?>
                 </div>
                 <div class="col-2">
@@ -154,10 +179,12 @@
           </div>
         </div> 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
         <script src="../../../public/js/search.js"></script>
         <script src="../../../public/js/comment.js"></script>
+        <script src="../../../public/js/menu.js"></script>
+        <script src="../../../public/js/slider.js"></script>
         <script type="text/javascript">
             setTimeout(function mod() {
 

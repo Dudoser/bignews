@@ -23,8 +23,9 @@ body{
 #main-but {
 	float: left;
 	background-color: #7aedf9;
-	padding: 2% 0% 1.5% 5%;
-	width: 15%;
+	padding: 9% 0% 15% 30%;
+	/*margin: 0px !important;*/
+	width: 100%;
 }
 
 #head {
@@ -44,6 +45,26 @@ body{
 	margin-top: -5% !important;
 	overflow:  hidden;
 }
+#cont {
+	z-index: 1;
+}
+#search-sub-menu {
+	/*display: none;*/
+	position: relative;
+	z-index: 2 !important;
+	background-color: #a9a98a;
+	height: 50px;
+}
+
+.show-block {
+  display: block !important;
+
+}
+
+.block {
+	display: none;
+}
+
 
 					/*  START STYLE FOR COMMENTS   */
 
@@ -171,5 +192,72 @@ body{
 #reg-title {
 	margin: 0% 0% 0% 34%;
 }
-
+#ser {
+	float: left;
+}
 					/* END STYLE FOR AUTH */
+
+					/* START STYLE FOR MENU */
+					
+
+#header-menu{
+	/*float: left;*/
+}
+
+#header-menu .menu li {
+	float: left;
+	margin: 1% 2% 0% 0%;
+	cursor: pointer;
+	padding: 0% 1% 0% 1%;
+}
+#header-menu .menu li a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#header-menu .menu li:hover {
+	float: left;
+	margin: 1% 2% 0% 0%;
+	border: 1px solid #fff;
+	border-radius: 5px;
+}
+#header-menu .menu li .subMenu, #header-menu .menu li .subMenu li .subSubMenu {
+	display: none;
+	background-color: #5a4848;
+	position: absolute;
+	z-index: 4;
+	width: 20%;
+	padding: 0% 0% 0% 1%;
+}
+#header-menu .menu li .subMenu li {
+	width: 100%;
+}
+#header-menu .menu li .subMenu li:hover {
+	width: 100%;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	display: block;
+}
+
+#header-menu .menu li .subMenu li .subSubMenu {
+	width: 100%;
+	margin: -15% 0% 0% 93%;
+}
+
+					/* END STYLE FOR MENU */
+
+#for-analitics {
+	border: 5px solid #fff;
+	padding: 1% 0% 1% 2%;
+}
+
+#for-analitics p {
+	font-size: 180%;
+	margin: 0% 0% 0% 45%;
+}
+
+#for-analitics a {
+	color: red;
+	padding-left: 36%;
+	text-decoration: none;
+}
