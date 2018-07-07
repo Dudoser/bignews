@@ -1,4 +1,3 @@
-<?php debug($checkLike); ?>
 <div>
 	<img src="../../../public/image/news/<?php echo $posts[0]['image']; ?>" />
 	<h1><?php echo $posts[0]['name']; ?></h1>
@@ -22,11 +21,11 @@
 						<form method="POST" action="/news/index?id=<?= $_GET['id']?>&page=<?= $_GET['page']?>&commentId=<?= $comments[$i]['comment_id']?>&likes_now=<?= $comments[$i]['likes_news']?>">
 							<div class="rate-comment">
 								<!-- <div class="pluse" onclick="ratePluse(<?= $_GET['id'] ?>, <?php echo $comments[$i]['comment_id']; ?>)"> -->
-									<?php if(isset($_SESSION['user_id'])) :?>
-										<?php if(isset($checkLike[$i]) && $checkLike[$i]['pluse'] == 1 && $checkLike[$i]['comment_id'] == $comments[$i]['comment_id']) :?>
-										<?php else: ?>
-											<input type="submit" name="plus" value="&plus;" />
-										<?php endif; ?>
+								<?php if(isset($_SESSION['user_id'])) :?>
+									<?php if(isset($checkLike[$i]) && $checkLike[$i]['pluse'] == 1 && $checkLike[$i]['comment_id'] == $comments[$i]['comment_id']) :?>
+									<?php else: ?>
+										<input type="submit" name="plus" value="&plus;" />
+									<?php endif; ?>
 								<?php endif; ?>
 									
 								<!-- </div> -->
@@ -34,13 +33,12 @@
 									<?php echo $comments[$i]['likes_news']; ?>
 								</div>
 								<!-- <div class="minus" onclick="rateMinus(<?= $_GET['id'] ?>, <?php echo $comments[$i]['comment_id']; ?>)"> -->
-									<?php if(isset($_SESSION['user_id'])) :?>
-										<?php if(isset($checkLike[$i]) && $checkLike[$i]['minus'] == 1 && $checkLike[$i]['comment_id'] == $comments[$i]['comment_id']) :?>
-										<?php else: ?>
-											<input type="submit" name="minus" value="&minus;" />
-										<?php endif; ?>
-									
+								<?php if(isset($_SESSION['user_id'])) :?>
+									<?php if(isset($checkLike[$i]) && $checkLike[$i]['minus'] == 1 && $checkLike[$i]['comment_id'] == $comments[$i]['comment_id']) :?>
+									<?php else: ?>
+										<input type="submit" name="minus" value="&minus;" />
 									<?php endif; ?>
+								<?php endif; ?>
 								<!-- </div> -->
 							</div>
 						</form>

@@ -22,7 +22,10 @@
 
               <div id="header-menu" class="col-md-8 col-lg-8 col-sm-8 col-lg-8">
                 <ul type="none" class="menu">
-                  <li><a href="/">Профиль</a></li>
+                  <?php if(isset($_SESSION['user_id'])): ?>
+                    <li><a href="/">Профиль</a></li>
+                    <li><a href="/news/create/">Написать Новость</a></li>
+                  <?php endif;?>
                   <li><a href="/category/">Категории</a></li>
                   <li><a href="/main/tag/">Теги</a></li>
                   <li class="btn">Поиск</li>

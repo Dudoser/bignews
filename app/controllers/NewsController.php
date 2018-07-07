@@ -20,24 +20,61 @@ class NewsController extends AppController
 		$likes = new Likes;
 
 		$id = $_GET['id'];
-		$user_id = $_SESSION['user_id'];
+		if (isset($_SESSION['user_id'])) {
+			$user_id = $_SESSION['user_id'];
 
-		if (isset($_POST['write-comment'])) {
+			if (isset($_POST['write-comment'])) {
 			
-			$commentText = $_POST['text'];
-			$articleId = $_GET['id'];
-			$dateTime = date("Y-m-d H:i:s");
+				$commentText = $_POST['text'];
+				$articleId = $_GET['id'];
+				$dateTime = date("Y-m-d H:i:s");
 
+				
+
+				$sendComment = $post->findBySql("INSERT INTO `comment` (`id`, `user_id`, `news_id`, `text`, `like_news`, `date_create`) VALUES (NULL, '1', '$articleId', '$commentText', '0', '$dateTime')");
+				
+				$last_id = $post->findBySql("SELECT id FROM `comment` ORDER BY id DESC LIMIT 1");
+				$last_id = $last_id[0]['id'];
+
+				$sendLike = $post->findBySql("INSERT INTO `likes` (`id`, `comment_id`, `user_id`, `news_id`, `count_likes`, `pluse`, `minus`) VALUES (NULL, '$last_id', '0', '$articleId', '0', '0', '0');");
+
+			}
+
+			if (isset($_POST['plus'])) {
+				$comment_id = $_GET['commentId'];
+				$likes_now = $_GET['likes_now'];
+				$id_user = $_SESSION['user_id'];
+				$likes_now = $likes_now + 1;
+
+				$checkL = $likes->findBySql("SELECT * FROM likes WHERE user_id = $id_user AND news_id = $comment_id");
+
+
+					$rates = $likes->findBySql("UPDATE `likes` SET `user_id` = $id_user, `count_likes` = '$likes_now', `pluse` = '1', `minus` = '0' WHERE comment_id = $comment_id");
+				
+				unset($_GET['commentId']);
+				unset($_GET['likes_now']);
+			}
+			if (isset($_POST['minus'])) {
+				$comment_id = $_GET['commentId'];
+				$likes_now = $_GET['likes_now'];
+				$id_user = $_SESSION['user_id'];
+				$likes_now = $likes_now - 1;
+
+
+				$checkL = $likes->findBySql("SELECT * FROM likes WHERE comment_id = $comment_id");
+
+
+					$rates = $comment->findBySql("UPDATE `likes` SET `user_id` = $id_user, `count_likes` = '$likes_now', `pluse` = '0', `minus` = '1' WHERE comment_id = $comment_id");
+
+				unset($_GET['likes_now']);
+				unset($_GET['commentId']);
+			}
+			$checkLike = $likes->findBySql("SELECT comment_id, pluse, minus FROM `likes` WHERE user_id = $user_id AND news_id = $id ORDER BY count_likes DESC");
 			
-
-			$sendComment = $post->findBySql("INSERT INTO `comment` (`id`, `user_id`, `news_id`, `text`, `like_news`, `date_create`) VALUES (NULL, '1', '$articleId', '$commentText', '0', '$dateTime')");
-			
-			$last_id = $post->findBySql("SELECT id FROM `comment` ORDER BY id DESC LIMIT 1");
-			$last_id = $last_id[0]['id'];
-
-			$sendLike = $post->findBySql("INSERT INTO `likes` (`id`, `comment_id`, `user_id`, `news_id`, `count_likes`, `pluse`, `minus`) VALUES (NULL, '$last_id', '0', '$articleId', '0', '0', '0');");
-
 		}
+
+
+		
 		
 
 
@@ -91,35 +128,6 @@ class NewsController extends AppController
 
 		}*/
 
-		if (isset($_POST['plus'])) {
-			$comment_id = $_GET['commentId'];
-			$likes_now = $_GET['likes_now'];
-			$id_user = $_SESSION['user_id'];
-			$likes_now = $likes_now + 1;
-
-			$checkL = $likes->findBySql("SELECT * FROM likes WHERE user_id = $id_user AND news_id = $comment_id");
-
-
-				$rates = $likes->findBySql("UPDATE `likes` SET `user_id` = $id_user, `count_likes` = '$likes_now', `pluse` = '1', `minus` = '0' WHERE comment_id = $comment_id");
-			
-			unset($_GET['commentId']);
-			unset($_GET['likes_now']);
-		}
-		if (isset($_POST['minus'])) {
-			$comment_id = $_GET['commentId'];
-			$likes_now = $_GET['likes_now'];
-			$id_user = $_SESSION['user_id'];
-			$likes_now = $likes_now - 1;
-
-
-			$checkL = $likes->findBySql("SELECT * FROM likes WHERE comment_id = $comment_id");
-
-
-				$rates = $comment->findBySql("UPDATE `likes` SET `user_id` = $id_user, `count_likes` = '$likes_now', `pluse` = '0', `minus` = '1' WHERE comment_id = $comment_id");
-
-			unset($_GET['likes_now']);
-			unset($_GET['commentId']);
-		}
 
 			
 			$posts = $post->findOne($_GET['id']);
@@ -139,8 +147,6 @@ class NewsController extends AppController
 					$textForuser = 'Для того что бы прочитать новость целиком, вам нужно авторизоваться';
 				}
 			}
-
-			$checkLike = $likes->findBySql("SELECT comment_id, pluse, minus FROM `likes` WHERE user_id = $user_id AND news_id = $id ORDER BY count_likes DESC");
 
 
 			
@@ -164,9 +170,34 @@ class NewsController extends AppController
 
 
 			$title = 'новость';
-			$this->set(compact('posts', 'comments', 'title', 'textForuser', 'checkLike'));
+
+			if (isset($_SESSION['user_id'])) {
+				$this->set(compact('posts', 'comments', 'title', 'textForuser', 'checkLike'));
+			}
+			else
+			{
+				$this->set(compact('posts', 'comments', 'title', 'textForuser'));
+			}
+
 		// }
 
+	}
+
+	public function createAction ()
+	{
+		if (isset($_SESSION['user_id'])) {
+
+			if (isset($_POST['save-news'])) {
+				
+			}
+
+			$title = 'Написание новости';
+			$this->set(compact('title'));
+		}
+		else
+		{
+			$redirect = youRedirect('/main/index/');
+		}
 	}
 
 }
