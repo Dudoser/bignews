@@ -19,7 +19,23 @@ class NewsController extends AppController
 		$comment = new Comment;
 		$likes = new Likes;
 
+		if (isset($_POST['hits_ajax']))
+		{
+
+			$hit = $_POST['hits'];
+
+			$id = $_POST['id'];
+
+			$hits = $post->findBySql("UPDATE `news` SET `hits` = '$hit' WHERE `news`.`id` = $id");
+			
+			$parseHits = json_encode($hits);
+            header("Content-type: application/json");
+            print($parseHits);
+            exit();	
+		}
+
 		$id = $_GET['id'];
+
 		if (isset($_SESSION['user_id'])) {
 			$user_id = $_SESSION['user_id'];
 
@@ -29,9 +45,19 @@ class NewsController extends AppController
 				$articleId = $_GET['id'];
 				$dateTime = date("Y-m-d H:i:s");
 
+				$category = $post->findBySql("SELECT category_id FROM `news` WHERE id = $articleId LIMIT 1");
+
+				if ($category[0]['category_id'] == 5)
+				{
+					$political = 1;
+				}
+				else
+				{
+					$political = 0;
+				}
 				
 
-				$sendComment = $post->findBySql("INSERT INTO `comment` (`id`, `user_id`, `news_id`, `text`, `like_news`, `date_create`) VALUES (NULL, '1', '$articleId', '$commentText', '0', '$dateTime')");
+				$sendComment = $post->findBySql("INSERT INTO `comment` (`id`, `user_id`, `news_id`, `text`, `political`, `date_create`) VALUES (NULL, '$user_id', '$articleId', '$commentText', '$political', '$dateTime')");
 				
 				$last_id = $post->findBySql("SELECT id FROM `comment` ORDER BY id DESC LIMIT 1");
 				$last_id = $last_id[0]['id'];

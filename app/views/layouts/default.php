@@ -187,12 +187,12 @@
         <script src="../../../public/js/search.js"></script>
         <script src="../../../public/js/comment.js"></script>
         <script src="../../../public/js/menu.js"></script>
-        <script src="../../../public/js/slider.js"></script>
+        <script src="../../../public/js/news.js"></script>
         <script type="text/javascript">
-            setTimeout(function mod() {
+            // setTimeout(function mod() {
 
                 // $('.modal').modal("show");
-            }, 5000);
+            // }, 5000);
 
         </script>
 

@@ -5,7 +5,8 @@
 	<?php if(isset($textForuser)) : ?>
 		<h4 id="for-analitics"><?= $textForuser ?> <p>&darr;</p><a href="/auth/">Авторизовация</a></h4>
 	<?php endif; ?>
-	<p>Посещений: <?php echo $posts[0]['hits']; ?></p>
+	<p>Посещений: <span id="hits"><?php echo $posts[0]['hits']; ?></span></p>
+	<p id="nowRead">Сейчас читают: 1</p>
 	<p>теги: <?php echo $posts[0]['tag']; ?></p>
 	<p><?php echo $posts[0]['date_create']; ?></p>
 </div>
